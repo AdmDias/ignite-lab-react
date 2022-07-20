@@ -1,19 +1,16 @@
 import { 
-    Box, 
-    Button, 
-    Center,
     FormControl,
     Heading,
     Icon,
-    Input,
     useTheme,
     VStack
 } from 'native-base'
-import { getStatusBarHeight } from 'react-native-iphone-x-helper'
-
-import { Envelope, Key } from 'phosphor-react-native'
 
 import PrimaryLogo from '../../assets/logo_primary.svg'
+import { Input } from '../../components/Input'
+import { Button } from '../../components/Button'
+import { Envelope, Key } from 'phosphor-react-native'
+import { getStatusBarHeight } from 'react-native-iphone-x-helper'
 
 export function Login() {
     const { colors } = useTheme()
@@ -38,7 +35,6 @@ export function Login() {
 
             <FormControl isRequired>
                 <Input 
-                    mt={4}
                     InputLeftElement={
                         <Icon 
                             as={
@@ -47,26 +43,12 @@ export function Login() {
                             ml={4}
                         />
                     }
-                    type='text'
-                    dataDetectorTypes='address'
-                    keyboardType='email-address'
                     placeholder='E-mail'
-                    size='md'
-                    bg='gray.700'
-                    borderWidth={1}
-                    color='gray.100'
-                    borderColor='gray.700'
-                    _focus={{
-                        borderColor:"green.500",
-                        bg: "gray.700"
-                    }}
-
                 />
             </FormControl>
 
             <FormControl isRequired>
                 <Input 
-                    mt={3}
                     InputLeftElement={
                         <Icon 
                             as={
@@ -76,30 +58,15 @@ export function Login() {
                         />
                     }
                     placeholder='Senha'
-                    size='md'
-                    bg='gray.700'
                     secureTextEntry
-                    color='gray.100'
-                    borderWidth={1}
-                    borderColor='gray.700'
-                    _focus={{
-                        borderColor:"green.500",
-                        bg: "gray.700"
-                    }}
                 />
             </FormControl>
 
             <Button
                 mt={5}
                 w='full'
-                bg='green.700'
-                size='lg'
-                _pressed={{
-                    bg: 'green.500'
-                }}
-            >
-                Entrar
-            </Button>
+                title='Entrar'
+            />
 
         </VStack>
     )

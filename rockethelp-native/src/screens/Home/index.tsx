@@ -2,37 +2,55 @@ import {
     HStack,
     VStack,
     Heading,
-    Button
+    Button,
+    IconButton,
+    useTheme
 } from 'native-base'
+
 import { SignOut } from 'phosphor-react-native'
-// import { getStatusBarHeight } from 'react-native-iphone-x-helper'
+import { useState } from 'react'
+import { getStatusBarHeight } from 'react-native-iphone-x-helper'
 import SecondaryLogo from '../../assets/logo_secondary.svg'
+import { Filter } from '../../components/Filter'
 
 export function Home() {
+    const [statusSelected, setStatusSelected] = useState<'open' | 'closed'>('open')
+    
+    const { colors } = useTheme()
+ 
     return (
         <VStack
-            height={'full'}
-            bg={'gray.400'}
+            flex={1}
+            bg='gray.700'
             pt={6}
         >
             <HStack 
-                my={10}
+                py={getStatusBarHeight() / 4}
                 px={6}
-                alignItems={'center'}
-                justifyContent={'space-between'}
+                bg='gray.400'
+                alignItems='center'
+                justifyContent='space-between'
             >
                 <SecondaryLogo />
-                <SignOut size={26} color='#7C7C8A'/>
+
+                <IconButton
+                    _pressed={{
+                        bg: 'gray.500'
+                    }}
+                >
+                    <SignOut color={colors.gray[300]}/>
+                </IconButton>
             </HStack>
 
             <VStack
-                bg={'gray.700'}
-                height={'full'}
-                pt={10}
+                flex={1}
                 px={6}
+                py={5}
             >
                 <HStack
-                    justifyContent={'space-between'}
+                    w='full'
+                    alignItems='center'
+                    justifyContent='space-between'
                 >
                     <Heading color={'gray.100'}>
                         Solicitações
@@ -44,21 +62,20 @@ export function Home() {
 
                 <HStack
                     mt={5}
+                    space={3}
                 >
-                    <Button
-                        flex={1}
-                        bg={'gray.400'}
-                        size={'md'}
-                    >
-                        EM ANDAMENTO
-                    </Button>
-                    <Button
-                        flex={1}
-                        bg={'gray.400'}
-                        size={'md'}
-                    >
-                        FINALIZADOS
-                    </Button>
+                    <Filter
+                        title='em andamento'
+                        type='open'
+                        onPress={() => setStatusSelected('open')}
+                        isActive={statusSelected === 'open'}
+                    />
+                    <Filter
+                        title='finalizados'
+                        type='closed'
+                        onPress={() => setStatusSelected('closed')}
+                        isActive={statusSelected === 'closed'}
+                    />
                 </HStack>
                 
                 <Button
